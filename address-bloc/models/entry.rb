@@ -1,4 +1,5 @@
 require 'bloc_record/base'
+require 'bloc_record/selection'
 
 class Entry < BlocRecord::Base
   def to_s
