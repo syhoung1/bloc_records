@@ -8,7 +8,8 @@ class MenuController
   end
 
   def main_menu
-    puts "#{@address_book.name} Address Book - #{Entry.count} entries"
+    puts "#{@address_book.name}"
+    puts "0 - Switch address books"
     puts "1 - View all entries"
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
@@ -19,6 +20,10 @@ class MenuController
     selection = gets.to_i
 
     case selection
+      when 0
+        system "clear"
+        select_address_book_menu
+        main_menu
       when 1
         system "clear"
         view_all_entries
@@ -38,11 +43,34 @@ class MenuController
       when 5
         puts "Good-bye!"
         exit(0)
+      when 6
+        system "clear"
+        testing
+        main_menu
       else
         system "clear"
         puts "Sorry, that is not a valid input"
         main_menu
     end
+  end
+
+  def testing
+    puts Entry.order(name: :asc)
+  end
+
+  def select_address_book_menu
+    puts "Select a different Address Book!"
+    @address_book.entries.each_with_index do |address_book, index|
+      puts "#{index} - #{address_book.name}"
+    end
+
+    index = gets.chomp.to_i
+
+    @address_book = AddressBook.find(index + 1)
+    system "clear"
+    return if @address_book
+    puts "Please select a valid index"
+    select_address_book_menu
   end
 
   def view_all_entries
