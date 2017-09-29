@@ -3,7 +3,7 @@ require_relative 'schema'
 require_relative 'persistence'
 require_relative 'selection'
 require_relative 'connection'
-
+require_relative 'collection'
 
 module BlocRecord
   class Base
@@ -25,7 +25,11 @@ module BlocRecord
       missing_method_name = m.to_s.split("_")
       attribute = missing_method_name.pop().to_sym
       method = missing_method_name.join("_").to_sym
-      find_by(attribute, args[0])
+      if method == "find_by"
+        find_by(attribute, args[0])
+      elsif method == "update"
+        self.update(attribute args.first)
+      end
     end
   end
 end
