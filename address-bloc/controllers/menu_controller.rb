@@ -55,9 +55,7 @@ class MenuController
   end
 
   def testing
-    
-    AddressBook.where(name: "David").not("id = '1'")
-    
+    AddressBook.where(id: 1).destroy_all
   end
 
   def select_address_book_menu
@@ -161,7 +159,7 @@ class MenuController
   end
 
   def delete_entry(entry)
-    address_book.entries.delete(entry)
+    Entry.delete(entry.id)
     puts "#{entry.name} has been deleted"
   end
 
