@@ -3,6 +3,7 @@ require 'bloc_record/schema'
 
 module BlocRecord
   class Collection < Array
+    include Persistence
     def update_all(updates)
       ids = self.map(&:id)
 
@@ -16,7 +17,9 @@ module BlocRecord
     def where(search)
       items = []
       self.each do |item|
-        items.push(item.class.where(search))
+        if item == item.class.where(search)
+          items.push(item.class.where(search))
+        end
       end
       items
     end
@@ -29,6 +32,15 @@ module BlocRecord
         end
       end
       items
+    end
+
+    def destroy_all
+      self.each do |item|
+        item.class.connection.execute(<<-SQL)
+          DELETE FROM #{item.class.table}
+          WHERE id = #{item.id}
+        SQL
+      end
     end
   end
 end
