@@ -1,0 +1,35 @@
+1. RubyGems manage packages of ruby programs and libraries. It is used to
+  standardize ruby files and libraries so that they can be distributed and used
+  in other ruby programs. RubyGems are used to include functionality that does
+  not exist in your own program or you do not wish to implement on your own.
+  RubyGems that are maintained and well written is often easier and better than 
+  implementing some functionality on your own.
+  
+2. Lazy loading is the process of loading and calculating necessary components
+  within your code as they become necessary. On the other hand, eager loading is
+  a pattern of loading all components at initialization, whether they are
+  necessary or not. Here exists a trade-off between a longer loading time in the
+  beginning followed by smoother operating throughout and a short initial load
+  time and possibly choppy operation throughout the program.
+
+3.  Insert into involves less logging and is better for appending data to a
+  table. Create Table has more logging and can be used to specify restrictions
+  of data types. Create Table allows for better control over defining what kind
+  of data goes into the table prior to inserting the data.
+
+4.  Extend and include both mix modules into classes. Include adds methods to
+  instances of the class it is mixed into. Extend adds methods to the class
+  itself that it is mixed into. You would include a module if you want to add
+  instance methods and you would extend a module if you want class methods.
+
+5.  The save! method needs to be a instance method because we want to save the
+  data of each instance of the class. If we made the save! method a class
+  method, we would not be saving the information we need since the class is just
+  a model for the kind of attributes an object should have. Instead, we want to
+  save the relevant data that is stored in each instance of the class.
+
+6.  The final SQL query in the example looks for the appropriate object and then
+  updates the values of the object. It searches for an id in the correct table
+  by calling self.class, then it searches for the id that matches the id of
+  the object that is calling the method. It updates the fields of that object as
+  needed once it has been found.
